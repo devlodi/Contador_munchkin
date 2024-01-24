@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta viewport="width=device-width, initial-scale=1.0">
+    <title>Munchkin Level and Strength Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue&family=MedievalSharp&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    <h1>Munchkin Tracker</h1>
+
+    <div id="playerForm">
+        <input type="text" id="playerName" placeholder="Player Name">
+        <input type="color" id="playerColor" value="#ff0000">
+        <button onclick="confirmColor()">OK</button>
+        <div id="colorPreview" style="display:inline-block; width:20px; height:20px; background-color:#ff0000;"></div>
+        <button onclick="addPlayer()">Add Player</button>
+    </div>
+
+    <div id="playersList"></div>
+
+    <button onclick="resetScores()">Reset Scores</button>
+    <button onclick="clearLogs()">Clear Logs</button>
+    <button onclick="showLogs()">Show Logs</button>
+    <div id="logs" style="display: none;"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>

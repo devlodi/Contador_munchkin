@@ -1,0 +1,75 @@
+body {
+    font-family: 'Comic Neue', cursive; /* Ou qualquer outra fonte com estilo "fantasia" */
+    margin: 0;
+    padding: 20px;
+    background-color: #f7eac6;
+    color: #3e3d32;
+}
+
+h1 {
+    color: #d17b47;
+    text-align: center;
+    font-family: 'MedievalSharp', cursive; /* Fonte que lembra os títulos medievais para o título */
+}
+
+#playerForm {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+#playerForm input[type="text"], #playerForm input[type="color"] {
+    padding: 10px;
+    margin: 5px;
+    border: 2px solid #d17b47;
+    border-radius: 5px;
+}
+
+#playerForm button {
+    margin: 5px;
+}
+
+#colorPreview {
+    border: 2px solid #d17b47;
+    display: inline-block;
+    border-radius: 5px;
+    margin-left: 5px;
+}
+
+.player {
+    background-color: #fff5e6;
+    border: 2px solid #d17b47;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+}
+
+button {
+    padding: 10px 20px;
+    background-color: #8b5f2e;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: 'Comic Neue', cursive;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+button:hover {
+    background-color: #d17b47;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+    }
+
+    .player div {
+        margin-top: 10px;
+    }
+
+    .player {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

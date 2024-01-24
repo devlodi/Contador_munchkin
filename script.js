@@ -58,17 +58,27 @@ function updatePlayersList() {
 
 
 function resetScores() {
-    players = players.map(player => ({ ...player, level: 1, strength: 0 }));
-    updateLocalStorage();
-    updatePlayersList();
-    logs.push("Scores reset for all players.");
+    // Mostra uma caixa de diálogo de confirmação antes de resetar os scores
+    const confirmReset = confirm("Are you sure you want to reset all scores?");
+    if (confirmReset) {
+        players = players.map(player => ({ ...player, level: 1, strength: 0 }));
+        updateLocalStorage();
+        updatePlayersList();
+        logs.push("Scores reset for all players.");
+    }
 }
 
+
 function clearLogs() {
-    logs = [];
-    updateLocalStorage();
-    document.getElementById('logs').innerHTML = '';
+    // Mostra uma caixa de diálogo de confirmação antes de limpar os logs
+    const confirmClear = confirm("Are you sure you want to clear all logs?");
+    if (confirmClear) {
+        logs = [];
+        updateLocalStorage();
+        document.getElementById('logs').innerHTML = '';
+    }
 }
+
 
 function editAttribute(index, attribute, amount) {
     players[index][attribute] += amount;
@@ -79,10 +89,15 @@ function editAttribute(index, attribute, amount) {
 }
 
 function removePlayer(index) {
-    logs.push(`Removed player: ${players[index].name}`);
-    players.splice(index, 1);
-    updateLocalStorage();
-    updatePlayersList();
+    const player = players[index];
+    // Mostra uma caixa de diálogo de confirmação antes de excluir o jogador
+    const confirmDelete = confirm(`Are you sure you want to remove ${player.name}?`);
+    if (confirmDelete) {
+        logs.push(`Removed player: ${player.name}`);
+        players.splice(index, 1);
+        updateLocalStorage();
+        updatePlayersList();
+    }
 }
 
 function confirmColor() {

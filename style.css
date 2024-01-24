@@ -1,38 +1,45 @@
 body {
-    font-family: 'Comic Neue', cursive; /* Ou qualquer outra fonte com estilo "fantasia" */
+    font-family: 'Comic Neue', cursive;
     margin: 0;
-    padding: 20px;
+    padding: 10px;
     background-color: #f7eac6;
     color: #3e3d32;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 h1 {
     color: #d17b47;
-    text-align: center;
-    font-family: 'MedievalSharp', cursive; /* Fonte que lembra os títulos medievais para o título */
+    font-family: 'MedievalSharp', cursive;
+    margin-bottom: 20px;
 }
 
 #playerForm {
+    width: 100%;
+    max-width: 500px; /* Limita a largura do formulário */
     margin-bottom: 20px;
-    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 }
 
-#playerForm input[type="text"], #playerForm input[type="color"] {
-    padding: 10px;
-    margin: 5px;
-    border: 2px solid #d17b47;
-    border-radius: 5px;
-}
-
-#playerForm button {
+#playerForm input, #playerForm button {
+    flex: 1;
+    min-width: 120px; /* Define um tamanho mínimo para os elementos */
     margin: 5px;
 }
 
 #colorPreview {
+    width: 20px;
+    height: 20px;
     border: 2px solid #d17b47;
-    display: inline-block;
     border-radius: 5px;
-    margin-left: 5px;
+}
+
+#playersList {
+    width: 100%;
+    max-width: 500px;
 }
 
 .player {
@@ -41,35 +48,67 @@ h1 {
     padding: 10px;
     margin-bottom: 10px;
     border-radius: 5px;
-    box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.player > span {
+    flex: 1 1 150px; /* Cresce e encolhe, com base mínima de 150px */
+    margin: 5px;
+}
+
+.player > div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.player button {
+    margin: 5px;
 }
 
 button {
-    padding: 10px 20px;
-    background-color: #8b5f2e;
-    color: white;
-    border: none;
+    padding: 10px;
     border-radius: 5px;
     cursor: pointer;
     font-family: 'Comic Neue', cursive;
-    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-button:hover {
-    background-color: #d17b47;
+#logs {
+    width: 100%;
+    max-width: 500px;
+    margin-top: 20px;
 }
 
 @media (max-width: 768px) {
-    body {
-        padding: 10px;
+    #playerForm {
+        flex-direction: column;
+        align-items: center;
     }
 
-    .player div {
-        margin-top: 10px;
+    #playerForm input, #playerForm button {
+        flex: 0 0 auto; /* Não permite que os elementos cresçam ou encolham */
+        width: calc(100% - 10px); /* Calcula a largura com base no espaço disponível */
     }
 
     .player {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    .player > span, .player > div {
+        width: 100%; /* Faz com que os elementos filho ocupem toda a largura do container */
+        justify-content: space-between;
+        margin-top: 5px;
+    }
+
+    .player button {
+        width: 100%; /* Botões ocupam toda a largura para facilitar a interação no mobile */
+        margin-bottom: 5px; /* Adiciona espaço abaixo dos botões para evitar toques acidentais */
+    }
+
+    #logs {
+        margin-top: 10px;
     }
 }

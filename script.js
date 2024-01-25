@@ -28,3 +28,21 @@ window.addEventListener('click', function(event) {
         event.target.classList.remove('show');
     }
 });
+
+
+// ESCONDE HEADER
+
+document.getElementById('toggleHeaderBtn').addEventListener('click', function() {
+    var body = document.body;
+    var button = document.getElementById('toggleHeaderBtn');
+    
+    // Toggle the class on the body
+    body.classList.toggle('header-hidden');
+
+    // Update the button text based on the header visibility
+    if (body.classList.contains('header-hidden')) {
+        button.textContent = 'Mostrar⚙️sala ⮉';
+    } else {
+        button.textContent = 'Esconder⚙️sala ⮉';
+    }
+});

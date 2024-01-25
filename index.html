@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Munchkin Counter</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <button id="createRoomBtn">Criar Sala</button>
+        <button id="joinRoomBtn">Entrar em uma Sala</button>
+        <button id="leaveRoomBtn">Sair da Sala</button>
+    </header>
+
+<div id="createRoomModal" class="modal">
+    <div class="modal-content create-room-content">
+        <span class="close">&times;</span>
+        <form id="createRoomForm">
+            <h2>Criar Sala</h2>
+            <div class="form-group">
+                <label for="roomName">Nome:</label>
+                <input type="text" id="roomName" name="roomName" required>
+            </div>
+            <div class="form-group">
+                <label for="adminPassword">Senha ADM:</label>
+                <input type="password" id="adminPassword" name="adminPassword" required>
+            </div>
+            <div class="form-group">
+                <label for="playerPassword">Senha Player:</label>
+                <input type="password" id="playerPassword" name="playerPassword">
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Criar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div id="joinRoomModal" class="modal">
+    <div class="modal-content join-room-content">
+        <span class="close">&times;</span>
+        <form id="joinRoomForm">
+            <h2>Entrar em uma Sala</h2>
+            <div class="form-group">
+                <label for="roomNameJoin">Nome da Sala:</label>
+                <input type="text" id="roomNameJoin" name="roomNameJoin" required>
+            </div>
+            <div class="form-group">
+                <label for="roomPassword">Senha:</label>
+                <input type="password" id="roomPassword" name="roomPassword" required>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn">Entrar</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+    <main>
+        <!-- Conteúdo da Sala -->
+    </main>
+
+    <footer>
+        <!-- Botões de Ações da Sala -->
+    </footer>
+<script src="script.js"></script>
+</body>
+</html>

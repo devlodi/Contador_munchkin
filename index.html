@@ -3,34 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Munchkin Counter</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Munchkin Contador</title>
+    <link rel="stylesheet" href="style.css"> <!-- Certifique-se de que o caminho para o CSS está correto -->
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-database.js"></script>
+    <script src="script.js" defer></script> <!-- Certifique-se de que o caminho para o seu JS está correto -->
 </head>
 <body>
-    <header>
-        <button id="createRoomBtn">Criar Sala</button>
-        <button id="joinRoomBtn">Entrar em uma Sala</button>
-        <button id="leaveRoomBtn">Sair da Sala</button>
-    </header>
-    <button id="toggleHeaderBtn" class="toggle-header">Esconder⚙️sala⮉</button>
+
+<header>
+    <button id="createRoomBtn">Criar Sala</button>
+    <button id="joinRoomBtn">Entrar em uma Sala</button>
+</header>
+
+<h4>Jogadores na Sala:</h4>
+
+<!-- Adicione isso dentro do seu elemento <body> -->
+<button id="toggleHeaderBtn" class="toggle-header">Esconder ⮉</button>
 
 
 <div id="createRoomModal" class="modal">
-    <div class="modal-content create-room-content">
+    <div class="modal-content">
         <span class="close">&times;</span>
         <form id="createRoomForm">
             <h2>Criar Sala</h2>
             <div class="form-group">
-                <label for="roomName">Nome:</label>
+                <label for="roomName">Nome da Sala:</label>
                 <input type="text" id="roomName" name="roomName" required>
-            </div>
-            <div class="form-group">
-                <label for="adminPassword">Senha ADM:</label>
-                <input type="password" id="adminPassword" name="adminPassword" required>
-            </div>
-            <div class="form-group">
-                <label for="playerPassword">Senha Player:</label>
-                <input type="password" id="playerPassword" name="playerPassword">
             </div>
             <div class="form-group">
                 <button type="submit" class="btn">Criar</button>
@@ -39,9 +38,8 @@
     </div>
 </div>
 
-
 <div id="joinRoomModal" class="modal">
-    <div class="modal-content join-room-content">
+    <div class="modal-content">
         <span class="close">&times;</span>
         <form id="joinRoomForm">
             <h2>Entrar em uma Sala</h2>
@@ -50,24 +48,57 @@
                 <input type="text" id="roomNameJoin" name="roomNameJoin" required>
             </div>
             <div class="form-group">
-                <label for="roomPassword">Senha:</label>
-                <input type="password" id="roomPassword" name="roomPassword" required>
-            </div>
-            <div class="form-group">
                 <button type="submit" class="btn">Entrar</button>
             </div>
         </form>
     </div>
 </div>
 
+<!-- Seção para gerenciar jogadores, mostrada após a criação da sala -->
+<div id="playerManagementSection" style="display: none;">
+<div id="managementSection">
+    <h3>Gerenciar Jogadores</h3>
 
-    <main>
-        <!-- Conteúdo da Sala -->
-    </main>
+    <form id="addPlayerForm">
+        <div class="form-group">
+            <label for="playerName">Nome do Jogador:</label>
+            <input type="text" id="playerName" name="playerName" required="">
+        </div>
+        <div class="form-group">
+            <button type="submit" class="btn">Adicionar Jogador</button>
+        </div>
+    </form>
+</div>
+ 
+</div>
 
-    <footer>
-        <!-- Botões de Ações da Sala -->
-    </footer>
-<script src="script.js"></script>
+   <!-- Lista para exibir jogadores adicionados -->
+    <div id="playersList">
+        
+        <ul id="players"></ul> <!-- Os jogadores serão listados aqui -->
+    </div>
+
+<div id="feedbackMessage" style="display: none;"></div> <!-- Elemento para mensagens de feedback -->
+
+
+
+
+<script>
+  // Configuração do Firebase
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyCjtqp-I3uzj9xiFlEORpqVIr-_t7ZTG5E",
+  authDomain: "munchkin-13188.firebaseapp.com",
+  databaseURL: "https://munchkin-13188-default-rtdb.firebaseio.com",
+  projectId: "munchkin-13188",
+  storageBucket: "munchkin-13188.appspot.com",
+  messagingSenderId: "358078476855",
+  appId: "1:358078476855:web:dbfdac5e41a7a2c133c5b2"
+};
+  // Inicializa o Firebase
+  firebase.initializeApp(firebaseConfig);
+</script>
+
+
 </body>
 </html>

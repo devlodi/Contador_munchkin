@@ -198,45 +198,6 @@ function updateStat(statDiv, change, playerId, statType) {
     }
 }
 
-// Função para adicionar a box do jogador na interface
-function addPlayerBox(playerName, playerId, level = 1, strength = 1) {
-    var playerBox = document.createElement('div');
-    playerBox.classList.add('player-box');
-    playerBox.id = 'player-' + playerId;
-
-    var nameDiv = document.createElement('div');
-    nameDiv.classList.add('player-name');
-    nameDiv.textContent = playerName;
-    playerBox.appendChild(nameDiv);
-
-    var levelStat = createStat('level', 'Nível', level, playerId);
-    var strengthStat = createStat('strength', 'Força', strength, playerId);
-    playerBox.appendChild(levelStat);
-    playerBox.appendChild(strengthStat);
-
-    document.getElementById('playersList').appendChild(playerBox);
-}
-
-// Função para adicionar um jogador à sala
-document.getElementById('addPlayerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    var playerName = document.getElementById('playerName').value;
-
-    if (!currentRoomId) {
-        console.error('ID da sala não definido. Certifique-se de que você está em uma sala.');
-        return;
-    }
-
-    var playersRef = firebase.database().ref('rooms/' + currentRoomId + '/players');
-    var newPlayerRef = playersRef.push();
-    newPlayerRef.set({
-        name: playerName,
-        level: 1,
-        strength: 1
-    }).then(() => {
-        addPlayerBox(playerName, newPlayerRef.key, 1, 1);
-    }).catch(error => console.error('Erro ao adicionar jogador:', error));
-});
 
 
 // ESCONDE HEADER

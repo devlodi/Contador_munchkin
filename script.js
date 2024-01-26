@@ -92,8 +92,19 @@ function displayPlayersForRoom(roomId) {
 }
 
 
+// Função para adicionar um jogador à sala
+document.getElementById('addPlayerForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Prevenindo a ação padrão do formulário
+    addPlayer();
+});
+
 function addPlayer() {
-    var playerName = document.getElementById('playerName').value;
+    var playerName = document.getElementById('playerName').value.trim();
+
+    if (playerName === "") {
+        alert('O nome do jogador não pode ser vazio.');
+        return;
+    }
 
     if (!currentRoomId) {
         console.error('ID da sala não definido. Certifique-se de que você está em uma sala.');
@@ -101,16 +112,20 @@ function addPlayer() {
     }
 
     var playersRef = firebase.database().ref('rooms/' + currentRoomId + '/players');
-    var newPlayerRef = playersRef.push();
-    newPlayerRef.set({
-        name: playerName,
-        level: 1,
-        strength: 1
-    }).then(() => {
-        addPlayerBox(playerName, newPlayerRef.key);
-    }).catch(error => console.error('Erro ao adicionar jogador:', error));
+    playersRef.orderByChild('name').equalTo(playerName).once('value', snapshot => {
+        if (snapshot.exists()) {
+            alert('Um jogador com esse nome já existe na sala.');
+        } else {
+            var newPlayerRef = playersRef.push();
+            newPlayerRef.set({ name: playerName, level: 1, strength: 1 }).then(() => {
+                document.getElementById('playerName').value = ''; // Limpar o campo de entrada
+                displayPlayersForRoom(currentRoomId); // Atualizar a lista de jogadores
+            }).catch(error => {
+                console.error('Erro ao adicionar jogador:', error);
+            });
+        }
+    });
 }
-
 // Função para adicionar a box do jogador na interface, incluindo nível e força
 function addPlayerBox(playerName, playerId, level = 1, strength = 1) {
     var playerBox = document.createElement('div');

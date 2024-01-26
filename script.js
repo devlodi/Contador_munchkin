@@ -1,5 +1,4 @@
 
-
 // Variável global para armazenar o ID da sala atual
 let currentRoomId = null;
 
@@ -126,7 +125,7 @@ function addPlayer() {
         }
     });
 }
-// Função para adicionar a box do jogador na interface, incluindo nível e força
+// Função para adicionar a box do jogador na interface
 function addPlayerBox(playerName, playerId, level = 1, strength = 1) {
     var playerBox = document.createElement('div');
     playerBox.classList.add('player-box');
@@ -137,13 +136,48 @@ function addPlayerBox(playerName, playerId, level = 1, strength = 1) {
     nameDiv.textContent = playerName;
     playerBox.appendChild(nameDiv);
 
-    // Agora passamos os valores de 'level' e 'strength' para 'createStat'
     var levelStat = createStat('level', 'Nível', level, playerId);
     var strengthStat = createStat('strength', 'Força', strength, playerId);
     playerBox.appendChild(levelStat);
     playerBox.appendChild(strengthStat);
 
+    // Botão de Exclusão
+    var deleteBtn = document.createElement('button');
+    deleteBtn.textContent = 'Excluir';
+    deleteBtn.onclick = function() { deletePlayer(playerId, playerBox); };
+    playerBox.appendChild(deleteBtn);
+
     document.getElementById('playersList').appendChild(playerBox);
+}
+
+// Função para excluir um jogador
+function deletePlayer(playerId, playerBox) {
+    var playerRef = firebase.database().ref('rooms/' + currentRoomId + '/players/' + playerId);
+    playerRef.remove().then(() => {
+        playerBox.remove(); // Remove a box do jogador da interface
+        console.log('Jogador excluído com sucesso.');
+    }).catch(error => {
+        console.error('Erro ao excluir jogador:', error);
+    });
+}
+
+// Função para atualizar o nível ou a força de um jogador
+function updateStat(statDiv, change, playerId, statType) {
+    var valueSpan = statDiv.querySelector('span');
+    var newValue = parseInt(valueSpan.textContent) + change;
+
+    if (newValue >= 1) {
+        valueSpan.textContent = newValue;
+        
+        var playerRef = firebase.database().ref('rooms/' + currentRoomId + '/players/' + playerId);
+        var updateData = {};
+        updateData[statType] = newValue;
+        playerRef.update(updateData).then(() => {
+            console.log(statType + ' atualizado com sucesso.');
+        }).catch(error => {
+            console.error('Erro ao atualizar ' + statType + ':', error);
+        });
+    }
 }
 
 
@@ -213,6 +247,3 @@ document.getElementById('toggleHeaderBtn').addEventListener('click', function() 
     // Atualizar o texto do botão com base na visibilidade do cabeçalho
     this.textContent = header.classList.contains('hidden') ? 'Mostrar⚙️sala ⮉' : 'Esconder⚙️sala ⮉';
 });
-
-
-

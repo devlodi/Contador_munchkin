@@ -91,11 +91,6 @@ function displayPlayersForRoom(roomId) {
     }).catch(error => console.error('Erro ao buscar jogadores:', error));
 }
 
-// Função para adicionar um jogador à sala
-document.getElementById('addPlayerForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    addPlayer();
-});
 
 function addPlayer() {
     var playerName = document.getElementById('playerName').value;
